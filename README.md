@@ -4,9 +4,10 @@
 ############################################
 # INSTALL MYSQL MAC
 ############################################
-# how to locate your 'php.ini' file
-# the '/' indicate that we want to search from the filesystem root
-mdfind php.ini
+
+#how to locate your 'php.ini' file
+the '/' indicate that we want to search from the filesystem root
+>mdfind php.ini
 
 # it is possible that apache don't use any php.ini file
 # you can verify by launching the php command php_info();
