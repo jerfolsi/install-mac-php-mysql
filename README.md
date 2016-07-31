@@ -1,21 +1,22 @@
-# This is a list of commands to install php & Mysql on mac Os x
-# mac-php-mysql
-
-############################################
 # INSTALL MYSQL MAC
-############################################
 
-#how to locate your 'php.ini' file
+###how to locate your 'php.ini' file
 the '/' indicate that we want to search from the filesystem root
->mdfind php.ini
 
-# it is possible that apache don't use any php.ini file
+```
+mdfind php.ini
+````
+
+###it is possible that apache don't use any php.ini file
 you can verify by launching the php command php_info();
 look at the field 'Loaded Configuration File' -> it may be written : /etc/php.ini or nothing at all
 
 # how to add the mysql path to PATH environment variable
 edit the file '/etc/paths'
+
+```
 add the following path : /usr/local/mysql/bin
+```
 
 # resolve the socket problem
 in /etc/php.ini, verifiy that the following attribute is well set as below
