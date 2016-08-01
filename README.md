@@ -82,6 +82,36 @@ $ curl -s https://getcomposer.org/installer | php
 $ sudo mv composer.phar /usr/local/bin/composer
 ```
 
+# CREATE YOUR FIRST PROJECT SYMFONY
+
+### Configure Vhost Apache
+
+Edit the /etc/httpd.conf file
+Search for ‘vhosts’ and uncomment the include line
+```
+\# Virtual hosts
+Include /private/etc/apache2/extra/httpd-vhosts.conf
+```
+
+Edit the /etc/apache2/extra/httpd-vhosts.conf file
+```
+<VirtualHost *:80>
+    ServerName projet1.com
+    ServerAlias www.projet1.com
+    DocumentRoot "/Users/jerome/Dev/projet1"
+    ErrorLog "/private/var/log/apache2/projet1.com-error_log"
+   CustomLog "/private/var/log/apache2/projet1.com-access_log" common
+    ServerAdmin neilgee@coolestguidesontheplanet.com
+        <Directory "/Users/jerome/Dev/projet1">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+
+	    Require all granted
+        </Directory>
+</VirtualHost>
+```
 
 
 
