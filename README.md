@@ -86,10 +86,10 @@ $ sudo mv composer.phar /usr/local/bin/composer
 
 ### Configure Vhost Apache
 
-Edit the /etc/httpd.conf file
+Edit the /etc/apache2/httpd.conf file
 Search for ‘vhosts’ and uncomment the include line
 ```
-\# Virtual hosts
+# Virtual hosts
 Include /private/etc/apache2/extra/httpd-vhosts.conf
 ```
 
@@ -113,5 +113,27 @@ Edit the /etc/apache2/extra/httpd-vhosts.conf file
 </VirtualHost>
 ```
 
+### configure acces to Cache and Logs
+```
+sudo chmod +a "_www allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs
+sudo chmod +a "`whoami` allow delete,write,append,file_inherit,directory_inherit" var/cache var/logs
+
+chmod 777 -R var/cache
+chmod 777 -R var/logs
+```
+
+### add a constructor to your AppKernel.php class
+to avoid the warning about the timezone
+
+```
+public function __construct($environment, $debug) {
+    date_default_timezone_set('Europe/Warsaw');
+    parent::__construct($environment, $debug);
+}
+```
+
+### create and access the first route
+define 'route1' in the 'DefaultController.php' file
+http://projet1.com/web/app_dev.php/route1
 
 
