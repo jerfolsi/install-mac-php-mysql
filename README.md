@@ -60,3 +60,28 @@ use mysql
 ```
 update user set authentication_string=password('root') where user='root';
 ```
+
+# INSTALL SYMFONY
+
+### Install symfony
+
+download symfony
+```
+sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
+```
+
+change rights
+```
+sudo chmod a+x /usr/local/bin/symfony
+```
+
+### Install Composer
+
+```
+$ curl -s https://getcomposer.org/installer | php
+$ sudo mv composer.phar /usr/local/bin/composer
+```
+
+
+
+
