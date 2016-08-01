@@ -94,6 +94,7 @@ Include /private/etc/apache2/extra/httpd-vhosts.conf
 ```
 
 Edit the /etc/apache2/extra/httpd-vhosts.conf file
+Warning : the recent version of Apache2 requires the following : 'Require all granted'
 ```
 <VirtualHost *:80>
     ServerName projet1.com
@@ -112,6 +113,9 @@ Edit the /etc/apache2/extra/httpd-vhosts.conf file
         </Directory>
 </VirtualHost>
 ```
+
+
+
 
 ### configure acces to Cache and Logs
 ```
