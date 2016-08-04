@@ -1,0 +1,237 @@
+Liste des étapes pour ce tutorial
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+1 #créer les repertoires et les fichiers vides
+la racine de ce projet s'appelle \gulp-starter\
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+2 #GIT
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+remplir le fichier .gitignore
+
+installer GIT >> aller ici http://msysgit.github.io >> téléchargr le fichier et le lancer
+pour lancer GIT => chercher dans windows 'git bash'
+
+>git init
+>git add .
+>git status
+>git commit -m "first commit"
+>git log --online
+
+ajouter git au Path Windows : exemple : set path=%path%;C:\Program Files\Git\bin
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+3 #BOWER > INSTALLATION
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+intaller node (pour vérifier : >node -v)
+
+installer npm (pour vérifier : >npm -v)
+
+installer bower : >npm install -g bower
+
+création d'un fichier bower.json
+>cd app
+>bower init
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+4 #BOWER > installation de différent packages
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+attention : il faut que git sont installé
+
+>bower install jquery angular backbone --save
+--save : va aussi éditer le fichier bower.json et ajouter ces modules dans
+la propriété "dependencies"
+
+
+#pour vérifier ce qu'on a installé
+>bower list
+
+#pour désinstaller un package (--save pour repercuter dans le fichier bower.json)
+>bower uninstall jquery --save
+
+#pour réinstaller le package jquery
+>bower install jquery --save
+
+#pour vérifier la liste des répertoires associés aux components
+>bower list --paths
+
+cela donne:
+  angular: 'bower_components/angular/angular.js',
+  jquery: 'bower_components/jquery/dist/jquery.js',
+  backbone: 'bower_components/backbone/backbone.js',
+  underscore: 'bower_components/underscore/underscore.js'
+
+#tester la commande bower install
+on peut effacer le repertoire bower_component et grace au fichier bower.json
+on va pouvoir le regénérer facilement en tapant la commande suivante:
+>bower install
+
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+5 # Ruby Setup for compass
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+to check if ruby is installed
+>ruby -v
+
+check you have the last version of 'gem'
+>gem update --system
+
+install compass
+>gem install compass
+
+test compass
+>compass -v
+
+list all the components installed with gem
+>gem list
+
+install susy
+>gem install susy
+
+install breakpoint
+>gem install breakpoint
+
+create a config.rb file for compass
+ruby-based configuration file
+>à la racine gulp-starter\
+>echo >> config.rb
+
+-----------------
+copier dans le fichier config.rb le contenu suivant:
+-----------------
+require 'susy'
+require 'breakpoint'
+
+project_type = :stand_alone
+http_path = "/"
+sass_dir = "scss"
+css_dire = "css"
+images_dir = 'images'
+fonts_dir = "fonts"
+javascript_dir = "js"
+line_comments = false
+preferred_syntax = :scss
+output_style = :extanded
+relative_assets = true
+
+-----------
+output_style peut recevoir :extanded ou :compressed
+-----------
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+6 # install Gulp
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+install gulp globally
+>npm install -g gulp
+
+create a config file localy
+>à la racine gulp-starter\
+>npm init
+
+that creates a package.json config file!
+
+install local gulp
+>npm install gulp --save-dev
+
+create a gulp file
+echo >> gulpfile.js
+
+installer différents composant de gulp : 
+->gulp-plumber
+->gulp-uglify
+->browser-sync
+->gulp-compass
+->gulp->autoprefixer
+->del
+->gulp-rename
+
+>npm install gulp-plumber gulp-uglify browser-sync gulp-compass gulp-autoprefixer del gulp-rename --save-dev
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+7A # write the gulpfile.js
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+
+voici un exemple de fichier qui permet de minifier les fichiers .JS 
+de tous les sous repertoires du dossier app/js
+
+var gulp = require('gulp');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+
+gulp.task('scripts', function(){
+	console.log('it worked dude!');
+	gulp.src(['app/js/**/*.js', '!app/js/**/*.min.js'])
+	.pipe(rename({suffix:'.min'}))
+	.pipe(uglify())
+	.pipe(gulp.dest('app/js/'));
+});
+
+gulp.task('default', ['scripts']);
+
+
+>>type 'gulp' to launch the script
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+7B # gulpfile.js >> watch
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+this task keeps watching these following files and catch any change
+
+gulp.task('watch', function(){
+	gulp.watch('app/js/**/*.js', ['scripts']);
+});
+
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+7C # gulpfile.js >> compass
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+this task transform SASS files  into CSS
+
+gulp.task('compass', function(){
+	gulp.src('app/scss/style.scss')
+	.pipe(compass({
+		config_file: './config.rb',
+		css: 'app/css',
+		sass: 'app/scss',
+		require: ['susy']
+	}))
+	.pipe(gulp.dest('app/css/'));
+});
+
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+7D # gulpfile.js >> plumber
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+si on écrit par erreur '$$bg-color' au lieu de '$bg-color' dans 
+un fichier SASS cela fait planter completement GULP et tout s'arrete.
+Grace à plumber, on peut éviter ce plantage
+il suffit d'ajouter un
+
+.pipe(plumber()) là ou l'on veut
+
+à placer right after the gulp.src(...)
+
+
+
