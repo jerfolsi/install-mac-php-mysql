@@ -5,6 +5,17 @@
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
+### Step : Active Agnoster theme
+Go to your home directory
+```
+nano .zshrc
+```
+
+make the following change
+```
+ZSH_THEME="agnoster"
+```
+
 
 ### Step : Darcula theme
 1.Download the theme
