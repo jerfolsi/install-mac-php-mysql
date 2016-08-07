@@ -31,3 +31,11 @@ download and double click here:
 https://github.com/powerline/fonts/blob/master/Meslo/Meslo%20LG%20M%20Regular%20for%20Powerline.otf
 
 
+### Step : final configuraiton that I like
+Instead of Darkula Theme -> I use Solarized Dark
+Background > black
+Background Transparency : a little bit
+And it's perfect :)
+
+
+
