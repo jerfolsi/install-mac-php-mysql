@@ -23,4 +23,8 @@ config.vm.box = "ubuntu/trusty64"
 ## boot the vagrant
 ```
 vagrant up
+vagrant ssh
 ```
+
+there is a mounted shared directory
+default: /vagrant => /Users/jerome/Dev/vagrant-test
